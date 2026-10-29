@@ -25,17 +25,17 @@
 
 ##ncbi runs
 ###by taxa
-# nextflow msa-comparison-from-dir.nf -c fromdir.config -profile ncbimammal
-# nextflow msa-comparison-from-dir.nf -c fromdir.config -profile ncbianimal
-# nextflow msa-comparison-from-dir.nf -c fromdir.config -profile ncbieuka
-# nextflow msa-comparison-from-dir.nf -c fromdir.config -profile ncbibacteria
-# nextflow msa-comparison-from-dir.nf -c fromdir.config -profile ncbivirus
+nextflow msa-comparison-from-dir.nf -c fromdir.config -profile ncbimammal
+nextflow msa-comparison-from-dir.nf -c fromdir.config -profile ncbianimal
+nextflow msa-comparison-from-dir.nf -c fromdir.config -profile ncbieuka
+nextflow msa-comparison-from-dir.nf -c fromdir.config -profile ncbibacteria
+nextflow msa-comparison-from-dir.nf -c fromdir.config -profile ncbivirus
 
-###by PID
-# nextflow msa-comparison-from-dir.nf -c fromdir.config -profile ncbipid0to20
-# nextflow msa-comparison-from-dir.nf -c fromdir.config -profile ncbipid20to40
-# nextflow msa-comparison-from-dir.nf -c fromdir.config -profile ncbipid40to60
-# nextflow msa-comparison-from-dir.nf -c fromdir.config -profile ncbipid80to100
+##by PID
+nextflow msa-comparison-from-dir.nf -c fromdir.config -profile ncbipid0to20
+nextflow msa-comparison-from-dir.nf -c fromdir.config -profile ncbipid20to40
+nextflow msa-comparison-from-dir.nf -c fromdir.config -profile ncbipid40to60
+nextflow msa-comparison-from-dir.nf -c fromdir.config -profile ncbipid80to100
 
 # Runs for internal tool comparisons:
 ##mafft
@@ -47,5 +47,5 @@
 #nextflow msa-comparison.nf -profile blastlamprey,clustalo
 
 ##clustalo
-nextflow msa-comparison.nf -profile blasthuman,muscle
-nextflow msa-comparison.nf -profile blastlamprey,muscle
+#nextflow msa-comparison.nf -profile blasthuman,muscle
+#nextflow msa-comparison.nf -profile blastlamprey,muscle

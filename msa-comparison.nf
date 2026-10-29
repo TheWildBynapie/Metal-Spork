@@ -47,11 +47,12 @@ workflow {
                 if (reference != null) {
                     log.warn "Reference '${reference}' given alongside directory '${inputPath}' is ignored -- directory entries don't support a shared reference."
                 }
+                def group = target.name  // e.g. "human", "lamprey"
                 def matches = files("${inputPath}/*.fasta")
                 matches = matches instanceof List ? matches : [matches]
-                matches.collect { f -> tuple(f.simpleName, f, null) }
+                matches.collect { f -> tuple(f.simpleName, f, null, group) }
             } else {
-                [ tuple(target.simpleName, target, reference ? file(reference) : null) ]
+                [ tuple(target.simpleName, target, reference ? file(reference) : null, null) ]
             }
         }
 
@@ -62,9 +63,9 @@ workflow {
            tuple(run_id, tool, options)
         }
 
-    // cross product: every (run, sample_id / fasta) combination
+    // cartesian product: every (run, sample_id / fasta) combination
     combos = run_ch.combine(input_ch)
-        .map { run_id, tool, options, sample_id, fasta, _reference -> tuple(run_id, tool, options, sample_id, fasta) }
+        .map { run_id, tool, options, sample_id, fasta, _reference, _group -> tuple(run_id, tool, options, sample_id, fasta) }
 
     //Align everything
     align(combos)
@@ -78,8 +79,8 @@ workflow {
 
     //Build a (sample_id, 'reference', path) entry for every input that specified one
     reference_ch = input_ch
-        .filter { _sample_id, _fasta, reference -> reference != null }
-        .map { sample_id, _fasta, reference -> tuple(sample_id, reference) }
+        .filter { _sample_id, _fasta, reference, _group -> reference != null }
+        .map { sample_id, _fasta, reference, _group -> tuple(sample_id, reference) }
 
     //Regroup alignments by the fasta file/sample_id
     alignments_by_sample = align.out.alignment
@@ -88,13 +89,27 @@ workflow {
 
     //Run rusty-metal, and then graphing on each group of alignments
     rustyMetal(alignments_by_sample)
+    
+        // Only samples that came from a directory have a group
+    sample_to_group = input_ch
+        .filter { _sample_id, _fasta, _reference, group -> group != null }
+        .map { sample_id, _fasta, _reference, group -> tuple(sample_id, group) }
 
-    // Collect every replicate's CSV into one list for averaging
-    replicate_csvs = rustyMetal.out.output
+    // Per-directory CSV lists: (group, [csv1, csv2, ...])
+    group_csvs = rustyMetal.out.output
+        .join(sample_to_group)                       // (sample_id, csv, group) -- standalone files drop out here automatically
+        .map { _sample_id, csv, group -> tuple(group, csv) }
+        .groupTuple()
+
+    // The existing "everything combined" total, reshaped to carry a label too
+    total_csvs = rustyMetal.out.output
         .map { _sample_id, csv -> csv }
         .collect()
+        .map { csvs -> tuple('total', csvs) }
 
-    average_dpos(file('non-nextflow/average_dpos.py'), replicate_csvs)
+    average_targets = group_csvs.mix(total_csvs)
+
+    average_dpos(file('non-nextflow/average_dpos.py'), average_targets)
 
     // Mix the averaged result back into the same channel shape as individual runs
     all_for_graphing = rustyMetal.out.output.mix(average_dpos.out.output)

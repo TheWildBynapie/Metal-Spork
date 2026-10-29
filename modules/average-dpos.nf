@@ -1,15 +1,15 @@
 process average_dpos {
-    tag "average"
+    tag "$label"
 
     input:
     path main_averaging_file
-    path csvs
+    tuple val(label), path(csvs)
 
     output:
-    tuple val("average-${workflow.profile}"), path("rusty-metal-average.csv"), emit: output
+    tuple val("average-${label}"), path("rusty-metal-${label}-average.csv"), emit: output
 
     script:
     """
-    python3 ${main_averaging_file} -i ${csvs} -o rusty-metal-average.csv
+    python3 ${main_averaging_file} -i ${csvs} -o rusty-metal-${label}-average.csv
     """
 }
