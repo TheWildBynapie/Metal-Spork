@@ -21,16 +21,16 @@ def write_summary(D, points, stress, output_file):
     pairwise_dpos = D[i_upper, j_upper]
     avg_dpos = pairwise_dpos.mean()
 
-    # Per-tool total: sum of that tool's row (its distance to every other tool)
-    tool_sums = [(points[i], D[i, :].sum()) for i in range(n)]
-    tool_sums.sort(key=lambda pair: pair[1])  # smallest sum first
+    # Per-tool avg: sum of that tool's row (its distance to every other tool)
+    tool_avgs = [(points[i], D[i, :].sum() / (n-1)) for i in range(n)]
+    tool_avgs.sort(key=lambda pair: pair[1])  # smallest sum first
 
     with open(output_file, "w") as f:
         f.write(f"MDS stress: {stress}\n")
         f.write(f"Average dPos: {avg_dpos}\n\n")
-        f.write("MSA tool dPos sums (smallest to largest):\n")
-        for tool, total in tool_sums:
-            f.write(f"{tool}\t{total}\n")
+        f.write("MSA tool average dPos (smallest to largest):\n")
+        for tool, avg in tool_avgs:
+            f.write(f"{tool}\t{avg}\n")
 
 #Args
 parser = argparse.ArgumentParser()

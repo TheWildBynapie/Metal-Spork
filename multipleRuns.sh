@@ -31,7 +31,7 @@
 # nextflow msa-comparison-from-dir.nf -c fromdir.config -profile ncbibacteria
 # nextflow msa-comparison-from-dir.nf -c fromdir.config -profile ncbivirus
 
-###by PID
+# ##by PID
 # nextflow msa-comparison-from-dir.nf -c fromdir.config -profile ncbipid0to20
 # nextflow msa-comparison-from-dir.nf -c fromdir.config -profile ncbipid20to40
 # nextflow msa-comparison-from-dir.nf -c fromdir.config -profile ncbipid40to60
@@ -47,5 +47,5 @@
 #nextflow msa-comparison.nf -profile blastlamprey,clustalo
 
 ##clustalo
-nextflow msa-comparison.nf -profile blasthuman,muscle
-nextflow msa-comparison.nf -profile blastlamprey,muscle
+#nextflow msa-comparison.nf -profile blasthuman,muscle
+#nextflow msa-comparison.nf -profile blastlamprey,muscle

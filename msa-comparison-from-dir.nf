@@ -46,6 +46,7 @@ workflow {
     replicate_csvs = rustyMetal.out.output
         .map { _sample_id, csv -> csv }
         .collect()
+        .map { csvs -> tuple("total-${workflow.profile}", csvs) }
 
     average_dpos(file('non-nextflow/average_dpos.py'), replicate_csvs)
 
