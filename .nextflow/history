@@ -233,3 +233,52 @@
 2026-10-28 18:47:22	6.8s	loquacious_ptolemy	OK	9835c6e70fb4ea2f2f22746138c207af	cdca4325-d026-4491-b901-9ec12d411f4c	nextflow msa-comparison-from-dir.nf -c fromdir.config -profile ncbipid20to40
 2026-10-28 18:47:31	8.5s	cheeky_golick	OK	9835c6e70fb4ea2f2f22746138c207af	4ec285a8-b2e5-417b-95cb-d4daff156de5	nextflow msa-comparison-from-dir.nf -c fromdir.config -profile ncbipid40to60
 2026-10-28 18:47:41	5.7s	gigantic_dijkstra	OK	9835c6e70fb4ea2f2f22746138c207af	71b8a4b7-e1a0-4a27-ba1b-7ad05086e65e	nextflow msa-comparison-from-dir.nf -c fromdir.config -profile ncbipid80to100
+2026-10-29 11:53:04	3.7s	insane_wright	ERR	a80e77163dbfce06d2baabc702214286	11b461b0-b617-4158-a5d8-cf0369f622d6	nextflow msa-comparison.nf -profile smallrun
+2026-10-29 12:06:24	3.5s	admiring_elion	ERR	b6a5d2c54fd27bdd8c4a1e928026955e	ed9cdab7-d162-4a35-ba23-2e011b966ebe	nextflow msa-comparison.nf -profile smallrun
+2026-10-29 12:08:03	8.7s	pedantic_easley	OK	d39c1ad61b1bfdfdce5fb74c419638f7	3173c468-002f-4927-8b97-7817e839a46c	nextflow msa-comparison.nf -profile smallrun
+2026-10-29 12:11:17	-	sick_yalow	-	d39c1ad61b1bfdfdce5fb74c419638f7	f9dd3471-997e-4233-bfee-ff3d50a71b13	nextflow msa-comparison.nf -profile balibase
+2026-10-29 12:13:53	-	fabulous_curran	-	d39c1ad61b1bfdfdce5fb74c419638f7	1944bdee-a97e-4948-bafb-042b85b4fcd4	nextflow msa-comparison.nf -profile balibase -with-report
+2026-10-29 12:14:04	17m 52s	serene_euler	OK	d39c1ad61b1bfdfdce5fb74c419638f7	1944bdee-a97e-4948-bafb-042b85b4fcd4	nextflow msa-comparison.nf -profile balibase -with-report -resume
+2026-10-29 12:39:27	4.9s	high_noyce	OK	d39c1ad61b1bfdfdce5fb74c419638f7	1944bdee-a97e-4948-bafb-042b85b4fcd4	nextflow msa-comparison.nf -profile balibase -with-report -resume
+2026-10-29 12:41:48	6.7s	goofy_nightingale	ERR	d39c1ad61b1bfdfdce5fb74c419638f7	1944bdee-a97e-4948-bafb-042b85b4fcd4	nextflow msa-comparison.nf -profile balibase -with-report -resume
+2026-10-29 12:45:39	5.9s	berserk_chandrasekhar	ERR	d39c1ad61b1bfdfdce5fb74c419638f7	1944bdee-a97e-4948-bafb-042b85b4fcd4	nextflow msa-comparison.nf -profile balibase -with-report -resume
+2026-10-29 13:51:36	7m 15s	spontaneous_mclean	OK	d39c1ad61b1bfdfdce5fb74c419638f7	1944bdee-a97e-4948-bafb-042b85b4fcd4	nextflow msa-comparison.nf -profile balibase -with-report -resume
+2026-10-29 14:11:03	2m 26s	jovial_hodgkin	ERR	d39c1ad61b1bfdfdce5fb74c419638f7	1944bdee-a97e-4948-bafb-042b85b4fcd4	nextflow msa-comparison.nf -profile balibase -with-report -resume
+2026-10-29 14:14:48	5m 10s	mighty_mclean	ERR	d39c1ad61b1bfdfdce5fb74c419638f7	1944bdee-a97e-4948-bafb-042b85b4fcd4	nextflow msa-comparison.nf -profile balibase -with-report -resume
+2026-10-29 14:27:38	1m 32s	kickass_lamarr	ERR	d39c1ad61b1bfdfdce5fb74c419638f7	1944bdee-a97e-4948-bafb-042b85b4fcd4	nextflow msa-comparison.nf -profile balibase -with-report -resume
+2026-10-29 14:29:33	7.7s	special_ampere	ERR	d39c1ad61b1bfdfdce5fb74c419638f7	1944bdee-a97e-4948-bafb-042b85b4fcd4	nextflow msa-comparison.nf -profile balibase -with-report -resume
+2026-10-29 14:31:22	6.5s	hungry_jones	ERR	d39c1ad61b1bfdfdce5fb74c419638f7	1944bdee-a97e-4948-bafb-042b85b4fcd4	nextflow msa-comparison.nf -profile balibase -with-report -resume
+2026-10-29 14:32:03	4.2s	boring_darwin	ERR	d39c1ad61b1bfdfdce5fb74c419638f7	1944bdee-a97e-4948-bafb-042b85b4fcd4	nextflow msa-comparison.nf -profile balibase -with-report -resume
+2026-10-29 14:32:26	6.3s	marvelous_marconi	ERR	d39c1ad61b1bfdfdce5fb74c419638f7	1944bdee-a97e-4948-bafb-042b85b4fcd4	nextflow msa-comparison.nf -profile balibase -with-report -resume
+2026-10-29 14:32:39	13.6s	fabulous_bartik	ERR	d39c1ad61b1bfdfdce5fb74c419638f7	1944bdee-a97e-4948-bafb-042b85b4fcd4	nextflow msa-comparison.nf -profile balibase -with-report -resume
+2026-10-29 14:33:50	5m 24s	high_bhabha	OK	d39c1ad61b1bfdfdce5fb74c419638f7	1944bdee-a97e-4948-bafb-042b85b4fcd4	nextflow msa-comparison.nf -profile balibase -with-report -resume
+2026-10-29 14:40:23	5m 11s	small_wozniak	ERR	d39c1ad61b1bfdfdce5fb74c419638f7	1944bdee-a97e-4948-bafb-042b85b4fcd4	nextflow msa-comparison.nf -profile balibase -with-report -resume
+2026-10-29 14:46:22	10m 8s	compassionate_snyder	ERR	d39c1ad61b1bfdfdce5fb74c419638f7	1944bdee-a97e-4948-bafb-042b85b4fcd4	nextflow msa-comparison.nf -profile balibase -with-report -resume
+2026-10-29 14:58:06	4m 17s	voluminous_brahmagupta	ERR	d39c1ad61b1bfdfdce5fb74c419638f7	1944bdee-a97e-4948-bafb-042b85b4fcd4	nextflow msa-comparison.nf -profile balibase -with-report -resume
+2026-10-29 18:14:23	2.1s	scruffy_goldstine	OK	9835c6e70fb4ea2f2f22746138c207af	1944bdee-a97e-4948-bafb-042b85b4fcd4	nextflow msa-comparison-from-dir.nf -c fromdir.config -profile balibase -resume -with-report
+2026-10-29 18:14:50	2.2s	fabulous_lagrange	OK	9835c6e70fb4ea2f2f22746138c207af	e5ab6483-0dd4-4950-b37b-6fcd569f7fb7	nextflow msa-comparison-from-dir.nf -c fromdir.config -profile balibase -with-report
+2026-10-29 18:15:58	54.1s	sleepy_wegener	ERR	9835c6e70fb4ea2f2f22746138c207af	e5ab6483-0dd4-4950-b37b-6fcd569f7fb7	nextflow msa-comparison-from-dir.nf -c fromdir.config -profile balibase -resume -with-report
+2026-10-29 18:17:14	26.2s	modest_volta	ERR	9835c6e70fb4ea2f2f22746138c207af	e5ab6483-0dd4-4950-b37b-6fcd569f7fb7	nextflow msa-comparison-from-dir.nf -c fromdir.config -profile balibase -resume -with-report
+2026-10-29 18:18:42	29.5s	amazing_bell	ERR	9835c6e70fb4ea2f2f22746138c207af	e5ab6483-0dd4-4950-b37b-6fcd569f7fb7	nextflow msa-comparison-from-dir.nf -c fromdir.config -profile balibase -resume -with-report
+2026-10-29 18:20:39	26.6s	ridiculous_shannon	ERR	9835c6e70fb4ea2f2f22746138c207af	e5ab6483-0dd4-4950-b37b-6fcd569f7fb7	nextflow msa-comparison-from-dir.nf -c fromdir.config -profile balibase -resume -with-report
+2026-10-29 18:38:14	27.3s	tender_mestorf	ERR	9835c6e70fb4ea2f2f22746138c207af	e5ab6483-0dd4-4950-b37b-6fcd569f7fb7	nextflow msa-comparison-from-dir.nf -c fromdir.config -profile balibase -resume -with-report
+2026-10-29 18:47:33	-	extravagant_gauss	-	9835c6e70fb4ea2f2f22746138c207af	e5ab6483-0dd4-4950-b37b-6fcd569f7fb7	nextflow msa-comparison-from-dir.nf -c fromdir.config -profile balibase -resume -with-report
+2026-10-29 18:53:49	21.9s	elated_booth	ERR	9835c6e70fb4ea2f2f22746138c207af	e5ab6483-0dd4-4950-b37b-6fcd569f7fb7	nextflow msa-comparison-from-dir.nf -c fromdir.config -profile balibase -resume -with-report
+2026-10-30 12:58:38	5.9s	disturbed_easley	OK	7a29e4ef433263323ab985fcfc010890	469958a9-9c27-4de8-a292-35b0b887fd81	nextflow msa-comparison.nf -profile smallrun
+2026-10-30 12:59:07	5.1s	big_bardeen	OK	7a29e4ef433263323ab985fcfc010890	1f48cda6-9d6c-43b8-bc08-40f393f48178	nextflow msa-comparison.nf -profile smallrun
+2026-10-30 13:00:30	-	admiring_jones	-	7a29e4ef433263323ab985fcfc010890	8795d3df-d4cd-47f3-ae62-cd2bd8274a0c	nextflow msa-comparison.nf -profile smallrunfromdir
+2026-10-30 13:02:40	-	amazing_monod	-	1f64be960184d893fbcd3b00b28d165e	fb696590-e5b1-4d6e-8145-c9a372fce990	nextflow msa-comparison.nf -profile smallrunfromdir
+2026-10-30 13:51:37	-	desperate_linnaeus	-	e951d7f6163f00a81e0329d3a6c6c7ef	ef482b4d-4937-47df-a1d4-49b8ccae25fa	nextflow msa-comparison.nf -profile smallrunfromdir
+2026-10-30 13:53:35	-	tiny_church	-	fb9538dcbec9e80e8a8f892c94370cb3	95650e0d-ea21-4d29-9318-692936ab72b6	nextflow msa-comparison.nf -profile smallrunfromdir
+2026-10-30 14:00:37	-	deadly_engelbart	-	2f05ab7b1a5b82fb624fcad84f4a1b82	fd02f8e7-9afd-41b9-9fc1-e9194a210bef	nextflow msa-comparison.nf -profile smallrunfromdir
+2026-10-30 14:08:22	5.3s	cheesy_engelbart	OK	4150064446320104246a45c56ec2d9af	61cde6ac-27c4-492b-b3d9-1bd396824911	nextflow msa-comparison.nf -profile smallrunfromdir
+2026-10-30 14:09:01	2.3s	high_tesla	OK	4150064446320104246a45c56ec2d9af	d983dd35-24c6-45f5-9d7c-3d9283c8790b	nextflow msa-comparison.nf -profile smallrunfromdir
+2026-10-30 14:09:47	5.7s	extravagant_lavoisier	OK	4150064446320104246a45c56ec2d9af	838d5817-1644-44b1-ace6-27c0e450be23	nextflow msa-comparison.nf -profile smallrun
+2026-10-30 14:10:04	5.4s	pedantic_noether	OK	4150064446320104246a45c56ec2d9af	8fbf0a52-ef2b-4942-871f-48bd2b1569a8	nextflow msa-comparison.nf -profile smallrunfromdir
+2026-10-30 14:12:06	6s	condescending_jones	OK	4150064446320104246a45c56ec2d9af	3f3d7108-9927-4931-99e3-a20c1fa2c54f	nextflow msa-comparison.nf -profile smallrun
+2026-10-30 14:14:06	6.6s	serene_brown	OK	4150064446320104246a45c56ec2d9af	6ff66c22-7300-4fb5-acd9-258dfec74e1a	nextflow msa-comparison.nf -profile smallrun
+2026-10-30 14:14:55	5.4s	zen_marconi	OK	4150064446320104246a45c56ec2d9af	55798949-1602-4113-a8e9-b9a9d22b3887	nextflow msa-comparison.nf -profile smallrun
+2026-10-30 14:17:07	5.8s	fervent_cray	OK	4150064446320104246a45c56ec2d9af	73902979-6f2b-41f6-812a-1f69634c5423	nextflow msa-comparison.nf -profile smallrun
+2026-10-30 14:17:51	5.6s	desperate_cajal	OK	def8873c642ee4b5643b73ebf6ced10e	6a5788c1-eff5-404e-8858-9ccdd2a38c1a	nextflow msa-comparison.nf -profile smallrun
+2026-10-30 14:23:49	14.2s	lonely_lorenz	ERR	d08de90ce5f90079b4f9593019d36a09	43c5b2d5-4e24-4855-87f7-e74b6300a26a	nextflow msa-comparison.nf -profile balibasepremade
+2026-10-30 14:25:23	12.3s	elegant_mendel	OK	d08de90ce5f90079b4f9593019d36a09	74fde0cb-4599-485c-8b61-c2f90b601549	nextflow msa-comparison.nf -profile balibasepremade
