@@ -27,7 +27,19 @@ params {
      * The format is:
      * '<run name>:<tool name>:<tool_options>'
      */
-    runs: List<String> = ['mafft_auto:mafft:mafft --auto', 'mafft_linsi:mafft:linsi', 'muscle:muscle:-align', 'kalign:kalign:', 't_coffee:t_coffee:', 'probcons:probcons:', 'clustalw:clustalw:', 'clustalo:clustalo:', 'amap:amap:', 'prank:prank:', 'fsa:fsa:']
+    runs: List<String> = [
+        'mafft_auto:mafft:mafft --auto',
+        'mafft_linsi:mafft:linsi', 
+        'muscle:muscle:-align', 
+        'kalign:kalign:', 
+        't_coffee:t_coffee:', 
+        'probcons:probcons:', 
+        'clustalw:clustalw:', 
+        'clustalo:clustalo:', 
+        'amap:amap:', 
+        'prank:prank:', 
+        'fsa:fsa:'
+    ]
 }
 
 workflow {
