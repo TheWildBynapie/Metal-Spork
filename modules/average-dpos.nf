@@ -3,13 +3,13 @@ process average_dpos {
 
     input:
     path main_averaging_file
-    tuple val(label), path(csvs)
+    tuple val(label), path(csvs), val(identity)
 
     output:
-    tuple val("average-${label}"), path("rusty-metal-${label}-average.csv"), emit: output
+    tuple val("average-${label}_${identity}"), path("rusty-metal-${label}-average_${identity}.csv"), val(identity), emit: output
 
     script:
     """
-    python3 ${main_averaging_file} -i ${csvs} -o rusty-metal-${label}-average.csv
+    python3 ${main_averaging_file} -i ${csvs} -o rusty-metal-${label}-average_${identity}.csv
     """
 }

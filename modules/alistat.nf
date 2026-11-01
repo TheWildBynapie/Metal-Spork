@@ -20,7 +20,7 @@ process average_identity {
     tuple val(sample_id), val(identities)
 
     output:
-    tuple val(sample_id), path("${sample_id}_average_identity.txt"), emit: output
+    tuple val(sample_id), stdout, emit: output
 
     script:
     def values = identities.join(' ')
@@ -28,7 +28,7 @@ process average_identity {
     echo "${values}" | awk '{
         sum = 0
         for (i = 1; i <= NF; i++) sum += \$i
-        printf "Average identity across %d alignments: %.2f%%\\n", NF, sum/NF
-    }' > ${sample_id}_average_identity.txt
+        printf "%.2f", sum/NF
+    }'
     """
 }
