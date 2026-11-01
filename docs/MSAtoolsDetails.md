@@ -4,10 +4,10 @@
 
 In my thesis I used a specific selection of MSA tools and versions. These are listed below.
 
-Annoyingly, not any aligner can just be slotted in without editing the code. If you wish to use any MSA tools not included in the list below, edit your copy of
-[`modules/aligners.nf`](../modules/aligners.nf)
+Annoyingly, not any aligner can just be slotted in without editing the code. If you wish to use any MSA tools not included in the list below, edit your copy of 
+[`modules/aligners.nf`](../modules/aligners.nf). Instructions for how are in the file.
 
-# Aligner details
+# MSA tool details
 | Name          | Version number | Latest version as of | original release date (1.0) | Latest major version release date (X.0) | Notes |
 | ------------- | -------------- | ------------------------- | ---- | ---- | ----- |
 | AMAP-align    |AMAP.2.2|30/08/2026| 2008 | 2014 | |
@@ -24,10 +24,13 @@ Annoyingly, not any aligner can just be slotted in without editing the code. If 
 | ProbCons      |1.12|30/08/2026| 2005 | 2005 |  |
 | T-Coffee      |Version_13.46.0.919e8c6b| | 2000 | 2018 | |
 
-### Abandoned aligners
+### Abandoned MSA tools
+There are several tools I tried to include, but couldn't install successfully. If you get any working, let me know. I'm particularly curious how PAGAN compares to PRANK.
 | Name          | Notes |
 | ------------- | --------------------- |
 | Any structural aligner | those take .pdb input instead of .fasta |
+| PAGAN | I lost at least 5 hours of my life to trying to get this single aligner to work. Alas, despite it having a very simple and easy docker container in its github, I cannot get it to work in nextflow for the life of me. [`Here's the link`](https://github.com/ariloytynoja/pagan-msa) if you can get it to work PLEASE tell me. |
+| PASTA | same issue as pagan |
 | UPP2 | I could not install it despite trying for 2 hours. Those people really need to improve their software. |
-| MLProbs | same as UPP2. Genuinely disgusting handling of software, the readmes are so bad |
+| MLProbs | same as UPP2. This one is genuinely disgusting handling of software, the readmes are so bad |
 | UPP | requires an older version of python that seems to be incompatible with its own dependencies... fascinating software :((( (Needs <=3.10 and pasta needs 3.13) |
