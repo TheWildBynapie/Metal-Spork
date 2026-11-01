@@ -34,3 +34,7 @@ There are several tools I tried to include, but couldn't install successfully. I
 | UPP2 | I could not install it despite trying for 2 hours. Those people really need to improve their software. |
 | MLProbs | same as UPP2. This one is genuinely disgusting handling of software, the readmes are so bad |
 | UPP | requires an older version of python that seems to be incompatible with its own dependencies... fascinating software :((( (Needs <=3.10 and pasta needs 3.13) |
+| Dialign-tx | requires a dna or protein matrix to run, and sorting this extra step out in time wasn't viable |
+| POA | same as dialign |
+| PAGAN | same as UPP2 |
+| PASTA | same as UPP2 |
