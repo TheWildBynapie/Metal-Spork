@@ -74,13 +74,6 @@ workflow {
         align(combos)
         aligners_ch = align.out.alignment //Necessary workaround to prevent crashes from this result being empty when nextflow tries to publish it if premade ensembles are used
 
-        //Compute %identity for every alignment align produced, then average per sample
-        alistat_identity(align.out.alignment)
-        identity_by_sample = alistat_identity.out
-            .map { sample_id, identity -> tuple(sample_id, identity.trim()) }
-            .groupTuple()
-        average_identity(identity_by_sample)
-
         //Build a (sample_id, 'reference', path) entry for every input that specified one
         reference_ch = input_ch
             .filter { _sample_id, _fasta, reference, _group -> reference != null }
@@ -89,6 +82,9 @@ workflow {
         rename_reference(reference_ch)
 
         labeled_reference_ch = rename_reference.out.map { sample_id, renamed -> tuple(sample_id, renamed) }
+
+        //Compute %identity for every alignment align produced, and the reference
+        alistat_identity(align.out.alignment.mix(labeled_reference_ch))
 
         //Regroup alignments by the fasta file/sample_id
         alignments_by_sample = align.out.alignment
@@ -112,40 +108,64 @@ workflow {
                 matchingFiles.collect { f -> tuple(sampleId, f) } //f.name.replaceAll(/\.fasta$/, ''),
             }
 
-        //Compute %identity for every alignment, then average per sample
+        //Compute %identity for every alignment
         alistat_identity(msa_ch)
-        identity_by_sample = alistat_identity.out
-            .map { sample_id, identity -> tuple(sample_id, identity.trim()) }
-            .groupTuple()
-        average_identity(identity_by_sample)
 
         //Regroup by sample_id, same shape rustyMetal already expects
         alignments_by_sample = msa_ch.groupTuple()
 
-        aligners_ch = channel.empty() //Necessary workaround to prevent crashes from this result being empty when nextflow tries to publish it
+        tagged_alignment = channel.empty() //Necessary workaround to prevent crashes from this result being empty when nextflow tries to publish it
     }
     //SHARED SECTION OF WORKFLOW ----------------------------------------------------------------------------------------------------
+
+    //average the percent identity per sample
+    identity_by_sample = alistat_identity.out
+            .map { sample_id, identity -> tuple(sample_id, identity.trim()) }
+            .groupTuple()
+    average_identity(identity_by_sample)
+
+    //Prepare to merge those percent identities into the sample_ids
+    identity_lookup = average_identity.out.output
+        .map { sample_id, identity -> tuple(sample_id, identity.trim()) }
+    
+    alignments_by_sample = alignments_by_sample
+        .join(identity_lookup)
+        .map { sample_id, paths, identity -> tuple("${sample_id}_${identity}", paths, identity)}
 
     //Run rusty-metal, and then graphing on each group of alignments
     rustyMetal(alignments_by_sample)
 
-    //Another piece only relevant if ensembles are being made - averages by directory
+    //Another piece only relevant if ensembles are being made - averages by directory, and adding identity tags to MSA output
     if (params.makeEnsemble) {
+        tagged_alignment = align.out.alignment
+            .join(identity_lookup)
+            .map { sample_id, paths, identity -> tuple("${sample_id}_${identity}", paths)}
+
         // Per-directory CSV lists: (group, [csv1, csv2, ...])
         group_csvs = rustyMetal.out.output
             .join(sample_to_group) // (sample_id, csv, group) -- standalone files drop out here automatically
-            .map { _sample_id, csv, group -> tuple(group, csv) }
+            .map { _sample_id, csv, identity, group -> tuple(group, csv, identity) }
             .groupTuple()
+            .map { group, csvs, identities ->
+                def avg_id = identities.collect { identities.toDouble() }.average().round(2)
+                tuple(group, csvs, avg_id)
+            }
     }
 
 
     // The existing "everything combined" total, reshaped to carry a label too
     total_csvs = rustyMetal.out.output
-        .map { _sample_id, csv -> csv }
+        .map { _sample_id, csv, identity -> tuple(csv, identity) }
         .collect()
-        .map { csvs -> tuple('total', csvs) }
+        .map { list ->
+            list = list.collate(2)
+            def csvs = list.collect { it[0] }
+            def identities = list.collect { it[1].toString().toDouble() }
+            def avg_id = identities.average().round(2)
+            tuple('total', csvs, avg_id)
+        }
 
-    //Here also a makeensemble vs not difference for the subgroup averages
+    //Here also a makeEnsemble vs not difference for the subgroup averages
     if (params.makeEnsemble) {
         average_targets = group_csvs.mix(total_csvs)
     }
@@ -164,25 +184,25 @@ workflow {
         all_for_graphing = rustyMetal.out.output.mix(average_dpos.out.output)
     }
 
+    //Create the graphs
     graphs(file('non-nextflow/make_distance_matrix.py'), all_for_graphing)
 
     publish:
-    aligners = aligners_ch
+    aligners = tagged_alignment
     rustyMetal = rustyMetal.output
     MDS = graphs.out.MDS
     MDS_nolines = graphs.out.MDS_nolines
     hierarchical = graphs.out.hierarchical
     summary = graphs.out.summary
-    avgIdentity = average_identity.out
 
-    onComplete:
-    if (workflow.success) {
-        def cmd = "python3 ${projectDir}/non-nextflow/append_identity_to_names.py ${params.resultsDir}"
-        cmd.execute().waitForProcessOutput(System.out, System.err)
-    }
-    else {
-        log.warn("Skipping append_identity_to_names.py -- workflow did not complete successfully.")
-    }
+    // onComplete:
+    // if (workflow.success) {
+    //     def cmd = "python3 ${projectDir}/non-nextflow/append_identity_to_names.py ${params.resultsDir}"
+    //     cmd.execute().waitForProcessOutput(System.out, System.err)
+    // }
+    // else {
+    //     log.warn("Skipping append_identity_to_names.py -- workflow did not complete successfully.")
+    // }
 }
 
 output {
@@ -195,20 +215,18 @@ output {
     }
 
     MDS {
-        path 'MSA_graphs'
+        path 'MSA_graphs' //{ sample_id, identity, _file -> "MSA_graphs/${sample_id}_${identity}" }
     }
     MDS_nolines {
-        path 'MSA_graphs'
+        path 'MSA_graphs' //{ sample_id, identity, _file -> "MSA_graphs/${sample_id}_${identity}" }
     }
     hierarchical {
-        path 'MSA_graphs'
+        path 'MSA_graphs' //{ sample_id, identity, _file -> "MSA_graphs/${sample_id}_${identity}" }
     }
     summary {
-        path 'MSA_graphs'
-        mode 'copy'
+        path 'MSA_graphs' //{ sample_id, identity, _file -> "MSA_graphs/${sample_id}_${identity}" }
     }
-    avgIdentity {
-        path 'MSA_graphs'
-        mode 'copy'
-    }
+    // avgIdentity {
+    //     path 'MSA_graphs'
+    // }
 }
