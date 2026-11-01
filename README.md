@@ -57,11 +57,25 @@ The parameters for the pipeline are lists, and currently do not support pure CLI
     "testdata/test.fasta",
     "testdata/test_gapless.fasta:testdata/test_reference.fasta"
   ]
+  "runs": [
+        "mafft_auto:mafft:mafft --auto",
+        "muscle:muscle:-align",
+        "kalign:kalign:",
+        "prank:prank:",
+    ]
 }
 ```
 Then specify the parameter file
 ```bash
 nextflow run msa-comparison.nf -params-file params.json
 ```
+## Code structure
 
+| Path | Purpose |
+| --- | --- |
+| `msa-comparison.nf` | Nextflow main method/main workflow file. This is the one you call to run the program and the one with all the code between pipeline steps |
+| `modules/` | All the Nextflow processes for msa-comparison.nf |
+| `non-nextflow/` | All the python scripts called by the various Nextflow processes |
+| `non-nextflow/non-pipeline/` | Python scripts I used in my thesis but didn't include in the pipeline. Primarily the 2 used for the identity vs avg dpos regression graphs |
+| `testdata/` | Use the files in here to test the pipeline. Especially for when you're adding new MSA tools |
    
