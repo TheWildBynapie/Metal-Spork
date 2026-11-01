@@ -5,7 +5,7 @@
 In my thesis I used a specific selection of MSA tools and versions. These are listed below.
 
 Annoyingly, not any aligner can just be slotted in without editing the code. If you wish to use any MSA tools not included in the list below, edit your copy of
-[`modules/aligners.nf`](modules/aligners.nf)
+[`modules/aligners.nf`](../modules/aligners.nf)
 
 # Aligner details
 | Name          | Version number | Latest version as of | original release date (1.0) | Latest major version release date (X.0) | Notes |
